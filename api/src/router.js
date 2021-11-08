@@ -1,3 +1,4 @@
+const path = require('path');
 const {
     Router,
     request
@@ -6,6 +7,9 @@ const multer = require('multer');
 const {
     response
 } = require('../app');
+const {
+    resolve
+} = require('path');
 const router = Router();
 const filename = (request, file, callback) => {
     callback(null, file.originalname);
@@ -43,6 +47,13 @@ router.post('/upload', upload.single('photo'), (request, response) => {
     }
 
 });
+
+const photoPath = path.resolve(__dirname, '../../client/photo-viewer.html');
+router.get('/photo-viewer', (request, response) => {
+        response.sendFile(photoPath);
+    }
+
+)
 
 
 
